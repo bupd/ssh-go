@@ -43,8 +43,15 @@ func main() {
 	defer localFile.Close()
 	log.Println("opened", localFile.Name())
 
+	// Ensure remote directory exists
+	remoteDir := "/potta/suthu"
+	err = sftpClient.MkdirAll(remoteDir)
+	if err != nil {
+		log.Fatal("Failed to create remote directory: ", err)
+	}
+
 	// Create destination file on the remote server
-	remoteFile, err := sftpClient.Create("/potta/suthu/uploadedfile.txt") // Adjust the remote path
+	remoteFile, err := sftpClient.Create(remoteDir + "/uploadedfile.txt")
 	if err != nil {
 		log.Fatal("Failed to create remote file: ", err)
 	}
