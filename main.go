@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -20,9 +21,13 @@ func main() {
 		log.Fatal("Failed to dial: ", err)
 	}
 
+	log.Println("we have a client")
+	time.Sleep(5 * time.Second)
+
 	session, err := client.NewSession()
 	if err != nil {
 		log.Fatal("Failed to create session: ", err)
 	}
+	log.Println("we have a session")
 	defer session.Close()
 }
