@@ -36,14 +36,15 @@ func main() {
 	log.Println("SFTP session established")
 
 	// Open local file
-	localFile, err := os.Open("./README.md") // Change to your local file path
+	localFile, err := os.Open("README.md") // Change to your local file path
 	if err != nil {
 		log.Fatal("Failed to open local file: ", err)
 	}
 	defer localFile.Close()
+	log.Println("opened", localFile.Name())
 
 	// Create destination file on the remote server
-	remoteFile, err := sftpClient.Create("/uploadedfile.txt") // Adjust the remote path
+	remoteFile, err := sftpClient.Create("/potta/suthu/uploadedfile.txt") // Adjust the remote path
 	if err != nil {
 		log.Fatal("Failed to create remote file: ", err)
 	}
